@@ -1,0 +1,18 @@
+spring:
+  rabbitmq:
+    chat:
+      queue-name:
+        places-chat
+      topic-exchange:
+        places-topic-chat
+      routing-key:
+        places.topic.chat.#
+      topic-key:
+        places.topic.chat.%s
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    username:
+      test
+    password:
+      test

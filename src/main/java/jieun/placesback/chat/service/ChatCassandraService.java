@@ -1,8 +1,10 @@
 package jieun.placesback.chat.service;
 
-import jieun.placesback.chat.vo.Message;
+import jieun.placesback.chat.param.MessageParam;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ChatCassandraService {
-    public void save(Message message) throws Exception {
+    public void save(MessageParam message) throws Exception {
     }
 }
