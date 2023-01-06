@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChatController {
     private final ChatService chatService;
 
-    @PostMapping("/chat/msg")
+    @PostMapping("/chat/group")
     void sendMessage(@RequestBody MessageParam messageParam) throws Exception {
         chatService.sendMessage(messageParam);
     }

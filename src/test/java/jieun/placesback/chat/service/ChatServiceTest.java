@@ -29,12 +29,12 @@ class ChatServiceTest {
         // given message with created msg id
         long accountIdx = 1;
         long groupIdx = 1;
-
+        Instant now = Instant.now();
         MessageParam messageParam = new MessageParam();
         messageParam.setAccountIdx(accountIdx);
         messageParam.setGroupIdx(groupIdx);
         messageParam.setContent("hello.");
-        messageParam.setTimestamp(Instant.now().getEpochSecond());
+        messageParam.setTimestamp(now.getEpochSecond());
 
 
         // when send to MQ, cass (already has the same id, and account idx
