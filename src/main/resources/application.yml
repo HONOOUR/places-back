@@ -1,18 +1,30 @@
 spring:
   rabbitmq:
     chat:
-      queue-name:
-        places-chat
-      topic-exchange:
-        places-topic-chat
-      routing-key:
-        places.topic.chat.#
-      topic-key:
-        places.topic.chat.%s
+      queue-name: places-chat
+      topic-exchange: places-topic-chat
+      routing-key: places.topic.chat.#
+      topic-key: places.topic.chat.%s
     ports:
       - "5672:5672"
       - "15672:15672"
-    username:
-      test
-    password:
-      test
+    username: test
+    password: test
+astra:
+  api:
+    application-token: AstraCS:GGELpiUZnvTnoRcOjRrBarGF:23e3603fc9247c94851a380bd41821a8650f836241c5d9d350e45988f6b3dd10
+    database-id: c79184af-6c28-4eb1-8fd8-5afa41e96752
+    database-region: us-east1
+    cross-region-failback: false
+    grpc:
+      enabled: true
+  cql:
+    driver-config:
+      basic:
+        session-keyspace: places
+    enabled: true
+    download-scb:
+      # if disabled zip files must be in folder (path)
+      enabled: true
+      # Looking for files scb_dbid-dbregion.zip in folder (default is ~/.astra/scb)
+      # path: /tmp
