@@ -3,13 +3,17 @@ package jieun.placesback.account.service;
 import jieun.placesback.account.entity.GroupEntity;
 import jieun.placesback.account.param.GroupJoinParam;
 import jieun.placesback.account.repository.GroupRepository;
+import jieun.placesback.account.vo.GroupVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 @Service
 @RequiredArgsConstructor
-public class AccountService {
+public class GroupService {
     private final GroupRepository groupRepository;
+    private final GroupCodeGenerator groupCodeGenerator;
 
     public void joinGroup(GroupJoinParam groupJoinParam) throws Exception{
         GroupEntity groupEntity = groupRepository.findByGroupIdx(groupJoinParam.getGroupIdx());
@@ -19,5 +23,20 @@ public class AccountService {
             }
         }
         throw new Exception();
+    }
+
+    public GroupVo addGroup(String groupName) throws IOException {
+        GroupEntity groupEntity = GroupEntity.builder()
+                .code(groupCodeGenerator.getGroupCode())
+                .name(groupName)
+                .build();
+        groupEntity = groupRepository.save(groupEntity);
+        GroupVo groupVo = GroupVo.builder()
+                .groupIdx(groupEntity.getGroupIdx())
+                .code(groupEntity.getCode())
+                .name(groupEntity.getName())
+                .build();
+
+        return groupVo;
     }
 }

@@ -3,24 +3,27 @@ package jieun.placesback.account.service;
 import jieun.placesback.account.entity.GroupEntity;
 import jieun.placesback.account.param.GroupJoinParam;
 import jieun.placesback.account.repository.GroupRepository;
+import jieun.placesback.account.vo.GroupVo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class AccountServiceTest {
+class GroupServiceTest {
     @InjectMocks
-    AccountService accountService;
+    GroupService groupService;
     @Mock
     GroupRepository groupRepository;
 
     @Test
-    void join_with_group_and_group_idx_failure() throws Exception {
+    void join_group_with_group_and_group_idx_failure() throws Exception {
         // given,
         GroupJoinParam groupJoinParam = new GroupJoinParam();
         groupJoinParam.setGroupIdx(2);
@@ -29,12 +32,12 @@ class AccountServiceTest {
         // when, no group
         lenient().when(groupRepository.findByGroupIdx(groupJoinParam.getGroupIdx())).thenReturn(null);
 
-        // then,
-        assertThrows(Exception.class, () -> accountService.joinGroup(groupJoinParam));
+        // then, no group with code
+        assertThrows(Exception.class, () -> groupService.joinGroup(groupJoinParam));
     }
 
     @Test
-    void join_with_group_and_group_code_failure() throws Exception {
+    void join_group_with_group_and_group_code_failure() throws Exception {
         // given,
         GroupJoinParam groupJoinParam = new GroupJoinParam();
         groupJoinParam.setGroupIdx(2);
@@ -46,8 +49,21 @@ class AccountServiceTest {
                 .code("london").build();
         lenient().when(groupRepository.findByGroupIdx(groupJoinParam.getGroupIdx())).thenReturn(groupEntity);
 
-        // then,
-        assertThrows(Exception.class, () -> accountService.joinGroup(groupJoinParam));
+        // then, wrong code
+        assertThrows(Exception.class, () -> groupService.joinGroup(groupJoinParam));
     }
 
+
+    @Test
+    void add_group_with_random_code() throws IOException {
+        String groupName = "test";
+
+        // when, random code (code is not empty)
+
+        GroupVo groupVo = new GroupVo();
+        // then,
+
+        assertEquals(groupVo, groupService.addGroup(groupName));
+
+    }
 }

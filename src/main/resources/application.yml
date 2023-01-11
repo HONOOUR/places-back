@@ -28,3 +28,6 @@ astra:
       enabled: true
       # Looking for files scb_dbid-dbregion.zip in folder (default is ~/.astra/scb)
       # path: /tmp
+redis:
+  host: 127.0.0.1
+  port: 49153
