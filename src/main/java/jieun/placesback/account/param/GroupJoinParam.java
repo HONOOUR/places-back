@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GroupJoinParam {
-    @JsonProperty("group_idx")
-    long groupIdx;
+    @JsonProperty("group_id")
+    String groupId;
     String code;
 }

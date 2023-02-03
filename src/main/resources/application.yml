@@ -30,4 +30,4 @@ astra:
       # path: /tmp
 redis:
   host: 127.0.0.1
-  port: 49153
+  port: 6379

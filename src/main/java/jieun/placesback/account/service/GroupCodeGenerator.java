@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -17,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GroupCodeGenerator {
     private final GroupCodeRepository groupCodeRepository;
     private final ResourceLoader resourceLoader;
-    private List<String> codes = null;
+    private List<String> codes = new ArrayList<>();
 
     public String getGroupCode() throws IOException {
         String code = generateCode();
@@ -34,7 +35,7 @@ public class GroupCodeGenerator {
     }
 
     private void initGroupCodes() throws IOException {
-        if (codes != null) {
+        if (codes.size() > 0) {
             return;
         }
         InputStream inputStream = resourceLoader.getResource("classpath:static/group_code/cities.csv").getInputStream();

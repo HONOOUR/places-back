@@ -9,12 +9,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GroupVo {
     @JsonProperty("group_idx")
-    long groupIdx;
+    String groupIdx;
     String code;
     String name;
 
     @Builder
-    public GroupVo(long groupIdx, String code, String name) {
+    public GroupVo(String groupIdx, String code, String name) {
         this.groupIdx = groupIdx;
         this.code = code;
         this.name = name;

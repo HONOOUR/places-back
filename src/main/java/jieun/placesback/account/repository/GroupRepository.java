@@ -1,19 +1,11 @@
 package jieun.placesback.account.repository;
 
-import com.redis.om.spring.repository.RedisDocumentRepository;
 import jieun.placesback.account.entity.GroupEntity;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GroupRepository extends RedisDocumentRepository<GroupEntity, Long> {
+public interface GroupRepository extends CrudRepository<GroupEntity, String>{
 
-    GroupEntity findByGroupIdx(long groupIdx);
-//    public GroupEntity findByGroupIdx(long groupIdx) {
-//        // find redis key
-//        return null;
-//    }
-//
-//    public GroupVo save(GroupEntity groupEntity) {
-//        // redis hash operation group idx ? - name, code
-//    }
+    GroupEntity findOneByGroupId(String groupId);
 }

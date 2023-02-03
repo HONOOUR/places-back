@@ -1,28 +1,26 @@
 package jieun.placesback.account.entity;
 
-import com.redis.om.spring.annotations.Document;
-import com.redis.om.spring.annotations.Indexed;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.NonNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
 @Getter
 @RedisHash("group")
-@Document
 public class GroupEntity {
-    @Id @Generated
-    long groupIdx;
-    @Indexed @NonNull
+    @Id @Indexed
+    String groupId;
+    @NonNull
     String code;
-    @Indexed @NonNull
+    @NonNull
     String name;
 
     @Builder
-    GroupEntity(long groupIdx, String code, String name) {
-        this.groupIdx = groupIdx;
+    GroupEntity(String groupId, String code, String name) {
+        this.groupId = groupId;
         this.code = code;
         this.name = name;
     }

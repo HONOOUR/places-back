@@ -3,10 +3,11 @@ package jieun.placesback.account.controller;
 import jieun.placesback.account.param.GroupJoinParam;
 import jieun.placesback.account.service.GroupService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import java.io.IOException;
 
 @Controller
@@ -15,8 +16,9 @@ public class AccountController {
     private final GroupService groupService;
 
     @PostMapping("/join/group")
-    void joinGroup(@RequestBody GroupJoinParam groupJoinParam) {
-
+    ResponseEntity<?> joinGroup(@RequestBody GroupJoinParam groupJoinParam) throws Exception {
+        groupService.joinGroup(groupJoinParam);
+        return ResponseEntity.ok().build();
     }
 
     /**
@@ -24,7 +26,7 @@ public class AccountController {
      * and authorized host
      */
     @PostMapping("/group/{name}")
-    void addGroup(@RequestParam String groupName) throws IOException {
-        groupService.addGroup(groupName);
+    ResponseEntity<?> addGroup(@PathVariable String name) throws IOException {
+        return ResponseEntity.ok(groupService.addGroup(name));
     }
 }

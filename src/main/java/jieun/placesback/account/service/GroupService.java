@@ -6,7 +6,6 @@ import jieun.placesback.account.repository.GroupRepository;
 import jieun.placesback.account.vo.GroupVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 
 @Service
@@ -16,13 +15,12 @@ public class GroupService {
     private final GroupCodeGenerator groupCodeGenerator;
 
     public void joinGroup(GroupJoinParam groupJoinParam) throws Exception{
-        GroupEntity groupEntity = groupRepository.findByGroupIdx(groupJoinParam.getGroupIdx());
+        GroupEntity groupEntity = groupRepository.findOneByGroupId(groupJoinParam.getGroupId());
         if (groupEntity != null) {
             if (groupJoinParam.getCode() == groupEntity.getCode()) {
                 // return jwt header
             }
-        }
-        throw new Exception();
+        }throw new Exception();
     }
 
     public GroupVo addGroup(String groupName) throws IOException {
@@ -32,7 +30,7 @@ public class GroupService {
                 .build();
         groupEntity = groupRepository.save(groupEntity);
         GroupVo groupVo = GroupVo.builder()
-                .groupIdx(groupEntity.getGroupIdx())
+                .groupIdx(groupEntity.getGroupId())
                 .code(groupEntity.getCode())
                 .name(groupEntity.getName())
                 .build();
