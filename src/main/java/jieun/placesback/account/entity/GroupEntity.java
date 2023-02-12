@@ -13,7 +13,7 @@ import org.springframework.data.redis.core.index.Indexed;
 public class GroupEntity {
     @Id @Indexed
     String groupId;
-    @NonNull
+    @NonNull @Indexed
     String code;
     @NonNull
     String name;

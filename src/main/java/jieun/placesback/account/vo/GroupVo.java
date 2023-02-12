@@ -10,7 +10,9 @@ import lombok.Setter;
 public class GroupVo {
     @JsonProperty("group_idx")
     String groupIdx;
+    @JsonProperty
     String code;
+    @JsonProperty
     String name;
 
     @Builder

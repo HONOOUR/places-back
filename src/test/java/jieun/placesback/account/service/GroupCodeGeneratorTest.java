@@ -1,7 +1,6 @@
 package jieun.placesback.account.service;
 
 
-import jieun.placesback.account.repository.GroupCodeRepository;
 import jieun.placesback.account.repository.GroupRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,13 +8,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -25,8 +19,6 @@ import static org.mockito.Mockito.when;
 public class GroupCodeGeneratorTest {
     @Mock
     GroupRepository groupRepository;
-    @Mock
-    GroupCodeRepository groupCodeRepository;
     @InjectMocks
     GroupCodeGenerator groupCodeGenerator;
 
@@ -39,7 +31,7 @@ public class GroupCodeGeneratorTest {
         String code = "london";
 
         // when, code is used
-        when(groupCodeRepository.isUsedCode(code)).thenReturn(true);
+//        when(groupRepository.isUsedCode(code)).thenReturn(true);
 
         // then
         assertEquals(new String(), groupCodeGenerator.getGroupCode());

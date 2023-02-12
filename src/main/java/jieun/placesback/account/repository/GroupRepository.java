@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface GroupRepository extends CrudRepository<GroupEntity, String>{
 
     GroupEntity findOneByGroupId(String groupId);
+
+    GroupEntity findByCode(String code);
 }

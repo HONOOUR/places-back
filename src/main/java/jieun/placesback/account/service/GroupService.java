@@ -19,8 +19,11 @@ public class GroupService {
         if (groupEntity != null) {
             if (groupJoinParam.getCode() == groupEntity.getCode()) {
                 // return jwt header
+                // be able to chat
             }
-        }throw new Exception();
+        } else {
+            throw new Exception();
+        }
     }
 
     public GroupVo addGroup(String groupName) throws IOException {

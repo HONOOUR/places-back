@@ -1,6 +1,6 @@
 package jieun.placesback.account.service;
 
-import jieun.placesback.account.repository.GroupCodeRepository;
+import jieun.placesback.account.repository.GroupRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
@@ -16,13 +16,13 @@ import java.util.concurrent.ThreadLocalRandom;
 @Service
 @RequiredArgsConstructor
 public class GroupCodeGenerator {
-    private final GroupCodeRepository groupCodeRepository;
+    private final GroupRepository groupRepository;
     private final ResourceLoader resourceLoader;
     private List<String> codes = new ArrayList<>();
 
     public String getGroupCode() throws IOException {
         String code = generateCode();
-        if (groupCodeRepository.isUsedCode(code)) {
+        if (isUsedCode(code)) {
             return new String();
         }
         return code;
@@ -45,5 +45,12 @@ public class GroupCodeGenerator {
             for (String code: line.split(","))
                 codes.add(code);
         }
+    }
+
+    private boolean isUsedCode(String code) {
+        if (groupRepository.findByCode(code) == null) {
+            return false;
+        }
+        return true;
     }
 }
